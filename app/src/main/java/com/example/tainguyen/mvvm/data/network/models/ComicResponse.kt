@@ -2,14 +2,14 @@ package com.example.tainguyen.mvvm.data.network.models
 
 import com.google.gson.annotations.SerializedName
 
-class ComicResponse : BaseResponse<Comic>()
+class ComicResponse : BaseResponse<ComicEntity>()
 
-data class Comic(@SerializedName("id") val id: String,
-                 @SerializedName("title") val title: String,
-                 @SerializedName("variantDescription") val variantDescription: String,
-                 @SerializedName("prices") val prices: List<Price>,
-                 @SerializedName("thumbnail") val thumbnail: Image,
-                 @SerializedName("images") val images: List<Image>
+data class ComicEntity(@SerializedName("id") val id: String,
+                       @SerializedName("title") val title: String,
+                       @SerializedName("variantDescription") val variantDescription: String,
+                       @SerializedName("prices") val prices: List<Price>,
+                       @SerializedName("thumbnail") val thumbnail: Image,
+                       @SerializedName("images") val images: List<Image>
 )
 
 data class Price(@SerializedName("price") val price: Double,

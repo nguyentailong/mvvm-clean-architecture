@@ -18,8 +18,13 @@ class AppConfig {
         }
     }
 
-    // Glide module
-    val glideModuleName = "MyGlide"
-    // SharedPreferences name
-    val prefName = "cardbey_pref"
+    class ModuleName {
+        companion object {
+            // Glide module
+            const val GLIDE = "ImageLoader"
+            // SharedPreferences name
+            const val PREF = "cardbey_pref"
+        }
+    }
+
 }

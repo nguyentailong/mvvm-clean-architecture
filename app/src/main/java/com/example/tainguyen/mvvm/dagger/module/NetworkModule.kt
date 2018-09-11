@@ -66,9 +66,5 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    internal fun provideGsonConverterFactory(gson: Gson): GsonConverterFactory {
-        return GsonConverterFactory.create(gson)
-    }
-
-
+    internal fun provideGsonConverterFactory(gson: Gson): GsonConverterFactory = GsonConverterFactory.create(gson)
 }

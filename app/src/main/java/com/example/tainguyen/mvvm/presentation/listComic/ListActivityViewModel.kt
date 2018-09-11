@@ -1,4 +1,4 @@
-package com.example.tainguyen.mvvm.presentation
+package com.example.tainguyen.mvvm.presentation.listComic
 
 import android.arch.lifecycle.MutableLiveData
 import com.example.tainguyen.mvvm.MyApplication
@@ -14,14 +14,9 @@ class ListActivityViewModel @Inject constructor(application: MyApplication,
 
     init {
         compositeDisposable.add(getComicListUseCase.execute()
-                .subscribe(
-                        {
-                            listComic.value = it
-                        },
-                        {
-                            Timber.e(it)
-                        }
-                ))
+                .doOnSuccess { listComic.value = it }
+                .doOnError { Timber.e(it) }
+                .subscribe())
     }
 
 }

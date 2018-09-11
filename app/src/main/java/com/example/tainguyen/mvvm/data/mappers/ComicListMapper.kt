@@ -8,13 +8,11 @@ import javax.inject.Singleton
 
 @Singleton
 class ComicListMapper @Inject constructor(private val comicMapper: ComicMapper) : Mapper<ComicResponse, ComicPagination>() {
-    override fun map(from: ComicResponse): ComicPagination {
-        return ComicPagination(
-                offset = from.data?.offset,
-                limit = from.data?.limit,
-                total = from.data?.total,
-                count = from.data?.count,
-                comics = comicMapper.map(from.data?.results)
-        )
-    }
+    override fun map(from: ComicResponse): ComicPagination = ComicPagination(
+            offset = from.data?.offset,
+            limit = from.data?.limit,
+            total = from.data?.total,
+            count = from.data?.count,
+            comics = comicMapper.map(from.data?.results)
+    )
 }

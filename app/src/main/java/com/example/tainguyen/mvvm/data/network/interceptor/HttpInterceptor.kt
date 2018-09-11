@@ -27,8 +27,5 @@ class HttpInterceptor @Inject internal constructor() : Interceptor {
         return chain.proceed(request)
     }
 
-    private fun generateHash(): String {
-        val stringBuilder = StringBuilder()
-        return stringBuilder.append(TS_VALUE).append(BuildConfig.MARVEL_PRIVATE_KEY).append(BuildConfig.MARVEL_PUBLIC_KEY).toString().md5()
-    }
+    private fun generateHash(): String = StringBuilder().append(TS_VALUE).append(BuildConfig.MARVEL_PRIVATE_KEY).append(BuildConfig.MARVEL_PUBLIC_KEY).toString().md5()
 }

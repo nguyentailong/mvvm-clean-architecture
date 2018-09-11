@@ -3,7 +3,7 @@ package com.example.tainguyen.mvvm.data.managers
 import com.example.tainguyen.mvvm.data.mappers.ComicListMapper
 import com.example.tainguyen.mvvm.data.mappers.ComicMapper
 import com.example.tainguyen.mvvm.data.network.ComicService
-import com.example.tainguyen.mvvm.domain.models.ComicEntity
+import com.example.tainguyen.mvvm.domain.models.Comic
 import com.example.tainguyen.mvvm.domain.models.ComicPagination
 import com.example.tainguyen.mvvm.domain.repositories.ComicRepository
 import io.reactivex.Single
@@ -21,7 +21,7 @@ class ComicManager @Inject constructor(private val comicService: ComicService,
                 .map(comicListMapper::map)
     }
 
-    override fun getComicDetails(comicId: String): Single<ComicEntity> {
+    override fun getComicDetails(comicId: String): Single<Comic> {
         return comicService.getComicDetails(comicId)
                 .map { response ->
                     response.body()?.data?.results?.get(0)

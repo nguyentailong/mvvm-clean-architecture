@@ -3,7 +3,7 @@ package com.example.tainguyen.mvvm.dagger.module
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.example.tainguyen.mvvm.dagger.ViewModelKey
-import com.example.tainguyen.mvvm.presentation.ListActivityViewModel
+import com.example.tainguyen.mvvm.presentation.listComic.ListActivityViewModel
 import com.example.tainguyen.mvvm.utils.ViewModelFactory
 import dagger.Binds
 import dagger.Module

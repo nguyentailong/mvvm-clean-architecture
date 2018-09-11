@@ -17,23 +17,21 @@ class RxEventBus @Inject constructor() {
 
     private val bus = PublishSubject.create<Any>()
 
-    fun publish(event: Any) {
-        bus.onNext(event)
+    fun publish(event: Any) = bus.onNext(event)
+
+    /**
+     * Publish an event
+     * @param lockOutTime This params is used to prevent double clicking
+     * @param event event to publish into PublishSubject
+     */
+    fun publishWithLock(event: Any, lockOutTime: Long = 500) {
+        if (isLocked) return
+        isLocked = true
+        publish(event)
+        timer.schedule(lockOutTime) { isLocked = false }
     }
 
-    fun publishWithLock(event: Any, lockOutTime: Long) {
-        if (!isLocked) {
-            isLocked = true
-            publish(event)
-            timer.schedule(lockOutTime) { isLocked = false }
-        }
-    }
+    fun <T> listenTo(clazz: Class<T>): Observable<T> = bus.ofType(clazz)
 
-    fun <T> listenTo(clazz: Class<T>): Observable<T> {
-        return bus.ofType(clazz)
-    }
-
-    fun hasObservers(): Boolean {
-        return bus.hasObservers()
-    }
+    fun hasObservers(): Boolean = bus.hasObservers()
 }
