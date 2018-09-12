@@ -6,8 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".presentation.comicDetails.ComicDetailsActivity">
 
-    <TextView
+    <fragment
+        android:id="@+id/frag_comic_images"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Comic Details"/>
+        android:name="com.example.tainguyen.mvvm.presentation.comicDetails.ComicImagesFragment"/>
 </android.support.constraint.ConstraintLayout>

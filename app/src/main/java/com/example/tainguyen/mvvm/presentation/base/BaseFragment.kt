@@ -1,27 +1,29 @@
 package com.example.tainguyen.mvvm.presentation.base
 
 import android.arch.lifecycle.ViewModelProvider
-import android.content.Context
 import android.os.Bundle
+import android.support.annotation.CallSuper
 import android.support.annotation.LayoutRes
-import android.view.MenuItem
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.example.tainguyen.mvvm.utils.RxEventBus
-import dagger.android.support.DaggerAppCompatActivity
+import dagger.android.support.DaggerFragment
 import io.reactivex.disposables.CompositeDisposable
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import javax.inject.Inject
 
-
-abstract class BaseActivity : DaggerAppCompatActivity() {
+abstract class BaseFragment : DaggerFragment() {
 
     private val SAVED_STATE = "SAVED_STATE"
+
     protected var saveState: Bundle? = null
 
+    protected var subscriptionsWhileActive: CompositeDisposable = CompositeDisposable()
     protected var subscriptionsWhileVisible: CompositeDisposable = CompositeDisposable()
     protected var subscriptionsWhileInMemory: CompositeDisposable = CompositeDisposable()
 
     @Inject
-    lateinit var rxEventBus: RxEventBus
+    lateinit var eventBus: RxEventBus
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -29,20 +31,14 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
     @get:LayoutRes
     abstract val layoutId: Int
 
-    /**
-     * noBackButton has default value is false means activity has back button by default
-     */
-    open val noBackButton: Boolean = false
-
-    override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
+    override fun onPause() {
+        super.onPause()
+        subscriptionsWhileActive.clear()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(layoutId)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         loadSavedState(savedInstanceState)
-        setUpToolbar()
     }
 
     private fun loadSavedState(savedInstanceState: Bundle?) {
@@ -57,26 +53,6 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
         outState.putBundle(SAVED_STATE, saveState)
     }
 
-    private fun setUpToolbar() {
-        supportActionBar?.apply {
-            setHomeButtonEnabled(!noBackButton)
-            setDisplayHomeAsUpEnabled(!noBackButton)
-        }
-    }
-
-
-    override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
-        if (menuItem.itemId == android.R.id.home) finish()
-        return super.onOptionsItemSelected(menuItem)
-    }
-
-    override fun onBackPressed() {
-        when {
-            supportFragmentManager.backStackEntryCount == 1 -> finish()
-            else -> super.onBackPressed()
-        }
-    }
-
     override fun onStop() {
         super.onStop()
         subscriptionsWhileVisible.clear()
@@ -86,4 +62,11 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
         super.onDestroy()
         subscriptionsWhileInMemory.clear()
     }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        return inflater.inflate(layoutId, container, false)
+    }
+
+
 }

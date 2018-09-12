@@ -8,7 +8,7 @@ class AppConfig {
         companion object {
             const val BASE_URL = "https://gateway.marvel.com/"
             const val COMICS = "v1/public/comics"
-            const val COMIC_DETAIL = "v1/public/comics/$COMIC_ID"
+            const val COMIC_DETAIL = "v1/public/comics/{$COMIC_ID}"
         }
     }
 

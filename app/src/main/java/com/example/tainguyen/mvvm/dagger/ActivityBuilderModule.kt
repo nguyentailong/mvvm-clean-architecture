@@ -1,6 +1,7 @@
 package com.example.tainguyen.mvvm.dagger
 
 import com.example.tainguyen.mvvm.presentation.comicDetails.ComicDetailsActivity
+import com.example.tainguyen.mvvm.presentation.comicDetails.ComicDetailsActivityProvider
 import com.example.tainguyen.mvvm.presentation.listComic.ListActivity
 import com.example.tainguyen.mvvm.presentation.listComic.ListActivityModule
 import dagger.Module
@@ -12,7 +13,7 @@ internal abstract class ActivityBuilderModule {
     @ContributesAndroidInjector(modules = [ListActivityModule::class])
     internal abstract fun listActivity(): ListActivity
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [ComicDetailsActivityProvider::class])
     abstract fun comicDetailsActivity(): ComicDetailsActivity
 
 }
