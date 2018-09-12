@@ -9,15 +9,16 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class ComicDetailsViewModel @Inject constructor(application: MyApplication,
-                                                getComicDetailsUseCase: GetComicDetailsUseCase) : BaseViewModel(application) {
+                                                private val getComicDetailsUseCase: GetComicDetailsUseCase) : BaseViewModel(application) {
     var comicDetails: MutableLiveData<Comic> = MutableLiveData()
 
-    init {
-        getComicDetailsUseCase.comicId = "59548"
+    fun fetchComicDetails(comicId: String) {
+        getComicDetailsUseCase.comicId = comicId
         compositeDisposable.add(getComicDetailsUseCase.execute()
                 .doOnSuccess { comicDetails.value = it }
                 .doOnError { Timber.e(it) }
                 .subscribe())
+
     }
 
 }

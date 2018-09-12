@@ -5,16 +5,15 @@ import android.os.Bundle
 import android.view.View
 import com.example.tainguyen.mvvm.R
 import com.example.tainguyen.mvvm.presentation.base.BaseFragment
-import com.example.tainguyen.mvvm.utils.loadImage
 import com.example.tainguyen.mvvm.utils.observe
-import kotlinx.android.synthetic.main.fragment_comic_images.*
+import kotlinx.android.synthetic.main.fragment_comic_details.*
 import javax.inject.Inject
 
-class ComicImagesFragment : BaseFragment() {
+class ComicDetailsFragment : BaseFragment() {
     @Inject
     lateinit var comicDetailsViewModel: ComicDetailsViewModel
 
-    override val layoutId: Int = R.layout.fragment_comic_images
+    override val layoutId: Int = R.layout.fragment_comic_details
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,12 +23,10 @@ class ComicImagesFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observe(comicDetailsViewModel.comicDetails) { it ->
-            if (it != null) {
-                when {
-                    it.images.isNotEmpty() -> comicImage.loadImage(it.images[0])
-                    else -> comicImage.loadImage(it.thumbnail)
-                }
-            }
+            tvTitle.text = it?.title
+            tvPrice.text = it?.prices.toString()
+            tvDescription.text = it?.description
         }
+
     }
 }

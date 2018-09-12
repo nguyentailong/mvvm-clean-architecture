@@ -9,4 +9,7 @@ abstract class ComicDetailsActivityProvider {
 
     @ContributesAndroidInjector
     internal abstract fun comicImagesFragment(): ComicImagesFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun comicDetailsFragment(): ComicDetailsFragment
 }

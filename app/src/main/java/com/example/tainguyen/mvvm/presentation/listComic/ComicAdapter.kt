@@ -25,8 +25,8 @@ class ComicAdapter(data: List<Comic> = emptyList(), val rxEventBus: RxEventBus) 
 class ComicAdapterViewHolder(itemView: View, private val rxEventBus: RxEventBus) : RecyclerView.ViewHolder(itemView) {
 
     fun bindData(item: Comic) = with(itemView) {
-        tv_title.text = item.title
-        tv_price.text = item.prices.toString()
+        tvTitle.text = item.title
+        tvPrice.text = item.prices.toString()
         if (!item.images.isEmpty()) {
             iv_thumbnail.loadImage(item.images[0])
         } else {
