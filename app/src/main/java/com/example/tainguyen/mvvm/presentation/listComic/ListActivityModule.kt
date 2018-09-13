@@ -10,7 +10,7 @@ import dagger.Provides
 class ListActivityModule {
 
     @Provides
-    internal fun provideComicAdapter(listActivity: ListActivity, rxEventBus: RxEventBus): ComicAdapter = ComicAdapter(rxEventBus = rxEventBus)
+    internal fun provideComicAdapter(rxEventBus: RxEventBus): ComicAdapter = ComicAdapter(rxEventBus = rxEventBus)
 
     @Provides
     internal fun provideDividerItemDecoration(listActivity: ListActivity): DividerItemDecoration = DividerItemDecoration(listActivity, OrientationHelper.VERTICAL)

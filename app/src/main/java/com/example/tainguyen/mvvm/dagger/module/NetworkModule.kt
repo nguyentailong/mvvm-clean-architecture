@@ -54,9 +54,9 @@ class NetworkModule {
     @Singleton
     internal fun provideOkHttpClientRestAPI(httpLoggingInterceptor: HttpLoggingInterceptor, httpInterceptor: HttpInterceptor): OkHttpClient {
         val builder = OkHttpClient.Builder()
-                .connectTimeout(10, TimeUnit.SECONDS)
-                .writeTimeout(10, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
+                .connectTimeout(1, TimeUnit.MINUTES)
+                .writeTimeout(1, TimeUnit.MINUTES)
+                .readTimeout(1, TimeUnit.MINUTES)
                 .addInterceptor(httpInterceptor)
         if (BuildConfig.DEBUG) {
             builder.addInterceptor(httpLoggingInterceptor)

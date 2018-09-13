@@ -5,9 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.tainguyen.mvvm.R
 import com.example.tainguyen.mvvm.domain.models.Comic
-import com.example.tainguyen.mvvm.utils.RxEventBus
-import com.example.tainguyen.mvvm.utils.inflate
-import com.example.tainguyen.mvvm.utils.loadImage
+import com.example.tainguyen.mvvm.utils.*
 import kotlinx.android.synthetic.main.list_item_comic.view.*
 import kotlin.properties.Delegates
 

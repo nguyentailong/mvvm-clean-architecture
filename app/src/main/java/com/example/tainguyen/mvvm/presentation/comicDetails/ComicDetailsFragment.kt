@@ -27,6 +27,5 @@ class ComicDetailsFragment : BaseFragment() {
             tvPrice.text = it?.prices.toString()
             tvDescription.text = it?.description
         }
-
     }
 }

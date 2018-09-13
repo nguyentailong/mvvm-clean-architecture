@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.view.MenuItem
 import com.example.tainguyen.mvvm.utils.RxEventBus
+import com.squareup.leakcanary.RefWatcher
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.disposables.CompositeDisposable
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
@@ -25,6 +26,9 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var leakCanaryRefWatcher: RefWatcher
 
     @get:LayoutRes
     abstract val layoutId: Int

@@ -4,10 +4,10 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.example.tainguyen.mvvm.AppConfig
 import com.example.tainguyen.mvvm.MyApplication
-import com.example.tainguyen.mvvm.R
+import com.squareup.leakcanary.LeakCanary
+import com.squareup.leakcanary.RefWatcher
 import dagger.Module
 import dagger.Provides
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 import javax.inject.Singleton
 
 
@@ -26,17 +26,9 @@ class AppModule {
     @Singleton
     fun provideSharedPreferences(context: Context): SharedPreferences = context.getSharedPreferences(AppConfig.ModuleName.PREF, Context.MODE_PRIVATE)
 
-//    @Provides
-//    @Singleton
-//    internal fun providePreferencesHelper(preferencesHelperImp: PreferencesHelperImp): PreferencesHelper {
-//        return preferencesHelperImp
-//    }
-
     @Provides
     @Singleton
-    fun provideCalligraphyDefaultConfig(): CalligraphyConfig =
-            CalligraphyConfig.Builder()
-                    //                .setDefaultFontPath("fonts/Comfortaa-Regular.ttf")
-                    .setFontAttrId(R.attr.fontPath)
-                    .build()
+    fun provideRefWatcher(): RefWatcher {
+        return LeakCanary.installedRefWatcher()
+    }
 }

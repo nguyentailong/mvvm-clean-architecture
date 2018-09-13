@@ -2,12 +2,12 @@ package com.example.tainguyen.mvvm.presentation.base
 
 import android.arch.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.support.annotation.CallSuper
 import android.support.annotation.LayoutRes
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.tainguyen.mvvm.utils.RxEventBus
+import com.squareup.leakcanary.RefWatcher
 import dagger.android.support.DaggerFragment
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
@@ -21,6 +21,9 @@ abstract class BaseFragment : DaggerFragment() {
     protected var subscriptionsWhileActive: CompositeDisposable = CompositeDisposable()
     protected var subscriptionsWhileVisible: CompositeDisposable = CompositeDisposable()
     protected var subscriptionsWhileInMemory: CompositeDisposable = CompositeDisposable()
+
+    @Inject
+    lateinit var leakCanaryRefWatcher: RefWatcher
 
     @Inject
     lateinit var eventBus: RxEventBus
@@ -61,6 +64,11 @@ abstract class BaseFragment : DaggerFragment() {
     override fun onDestroy() {
         super.onDestroy()
         subscriptionsWhileInMemory.clear()
+        try {
+            leakCanaryRefWatcher.watch(this)
+        } catch (e: Exception) {
+
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

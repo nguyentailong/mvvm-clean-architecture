@@ -23,7 +23,7 @@ ext {
     glideVersion = '4.8.0'
     calligraphyVersion = '2.3.0'
     constraintLayout = '1.1.3'
-    leakcanaryVersion = '1.5.4'
+    leakCanaryVersion = '1.6.1'
 
     //Testing
     jUnitVersion = '4.10'

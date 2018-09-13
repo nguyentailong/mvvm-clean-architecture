@@ -14,7 +14,6 @@ import javax.inject.Singleton
             ActivityBuilderModule::class,
             ViewModelModule::class,
             AppModule::class,
-            RxModule::class,
             DataModule::class,
             UtilsModule::class,
             NetworkModule::class
